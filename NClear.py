@@ -52,7 +52,7 @@ class NmapParser:
                     self.block_parser(block)
 
                 
-                print("\n\n\n")
+                print("\n\n--------------------------------------------------------------\n\n")
         
         
         
