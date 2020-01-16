@@ -16,16 +16,24 @@ class NmapParser:
                        'smb-vuln-ms10-061: NT_STATUS_ACCESS_DENIED',
                        'ssl-ccs-injection: No reply from server (TIMEOUT)',
                        'NSE',
-                       'Not shown:'
-                       'Host is up'
-                       'Could not negotiate a connection'
-                       'Failed to receive bytes'
-                       'Read data files from:'
-                       'Service detection performed.'
-                       'Nmap done:'
-                       'EOF'
-                       '|_samba-vuln-cve-2012-1182: Could not negotiate a connection:SMB: Failed to receive bytes: EOF'
-                       '</pre>'
+                       'Not shown:',
+                       'Host is up',
+                       'Could not negotiate a connection',
+                       'Failed to receive bytes',
+                       'Read data files from:',
+                       'Service detection performed.',
+                       'Nmap done:',
+                       'EOF',
+                       '|_samba-vuln-cve-2012-1182: Could not negotiate a connection:SMB: Failed to receive bytes: EOF',
+                       '</pre>',
+                       "Couldn't find any ",
+                       'This web server might not be vulnerable',
+                       'Wordpress installation was not found',
+                       'ePO Agent not found',
+                       '1 service unrecognized despite returning data.',
+                       'SF-',
+                       'SF:',
+                       'Raw packets sent:'
                       ]
                        
     def block_parser(self, block):
@@ -38,7 +46,11 @@ class NmapParser:
                     if string in line or string == line:
                         print_line = False
                 if print_line:
-                    print(line)     
+                    if args.style2:
+                        line = line.replace("|","")
+                        print(line)
+                    else:
+                        print(line)
 
     def run(self):
         with open(args.file, "r") as output:
@@ -60,6 +72,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description = "An Nmap Parser Attempt")
     parser.add_argument('--vulns', required=False, action="store_true", dest="vulns", help="Only print hosts that have vulnerabilities")
     parser.add_argument('--file', required=True, dest="file", help="Nmap Output File to parse")
+    parser.add_argument('--style2', required=False, action="store_true", help="Choose Style 2 for output (Removes |)")
     args = parser.parse_args()
     
     parser = NmapParser(args)
