@@ -1,5 +1,6 @@
 # NClear
 Cleares Nmap Output files. Removes failed scripts, verbose information, [...]   
+Mostly useful for scanning networks, and getting a quick vuln overview
 
 
 Usage:  
